@@ -3,14 +3,14 @@ class Solution {
         if(s== null || s.equals("")){
             return true;
         }
-        int index = 0;
-        for (int i = 0 ; i<t.length();i++){
-            if(s.charAt(index)== t.charAt(i)){
-                index++;
+        int i =0;
+        for (int j =0 ; j< t .length() ; j++){
+            if(i < s.length() && s.charAt(i)==t.charAt(j)){
+                i++;
             }
-            if(index==s.length()){
-                return true;
-            }
+
+        }if (i == s.length()){
+            return true;
         }return false;
     }
 }
