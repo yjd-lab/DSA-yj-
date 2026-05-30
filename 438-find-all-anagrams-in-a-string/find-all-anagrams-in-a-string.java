@@ -1,28 +1,31 @@
 class Solution {
     public List<Integer> findAnagrams(String s, String p) {
-        List<Integer> res = new ArrayList<>();
-        if(s.length() < p.length()) {
-            return res;
+        
+        int j = 0;
+        List<Integer> l = new ArrayList<>();
+        HashMap<Character ,Integer> s1 = new HashMap<>();
+        HashMap<Character ,Integer> p1 = new HashMap<>();
+        if(s.length()<p.length()){
+            return l;
         }
-        HashMap<Character, Integer> pmap = new HashMap<>();
-        HashMap<Character, Integer> smap = new HashMap<>();
-        for (int i = 0 ; i< p.length(); i++){
-            pmap.put(p.charAt(i),pmap.getOrDefault(p.charAt(i), 0) + 1);
-            smap.put(s.charAt(i),smap.getOrDefault(s.charAt(i), 0) + 1);
+        for (int i = 0  ; i< p.length() ; i++){
+            s1.put(s.charAt(i),s1.getOrDefault(s.charAt(i),0)+1);
+            p1.put(p.charAt(i),p1.getOrDefault(p.charAt(i),0)+1);
         }
-        if(smap.equals(pmap)){
-             res.add(0);
+        if(s1.equals(p1)){
+            l.add(0);
         }
-        for(int i = p.length(); i< s.length() ; i++){
-            smap.put(s.charAt(i),smap.getOrDefault(s.charAt(i), 0) + 1);
-            smap.put(s.charAt(i-p.length()),smap.getOrDefault(s.charAt(i-p.length()), 0) - 1);
-            if(smap.get(s.charAt(i-p.length()))== 0 ){
-                smap.remove(s.charAt(i-p.length()));
+        for(int i = p.length(); i< s.length() ;i++){
+            s1.put(s.charAt(i),s1.getOrDefault(s.charAt(i),0)+1);
+            s1.put(s.charAt(j),s1.getOrDefault(s.charAt(j),0)-1);
+            if(s1.get(s.charAt(j))==0){
+                s1.remove(s.charAt(j));
             }
-            if(smap.equals(pmap)){
-                 res.add(i-p.length()+1);
+            j++;
+            if(s1.equals(p1)){
+                l.add(j);
             }
         }
-        return res;
+        return  l ;
     }
 }
