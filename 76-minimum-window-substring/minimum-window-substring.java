@@ -1,75 +1,42 @@
 class Solution {
-
     public String minWindow(String s, String t) {
-
         if(s.length() < t.length()) {
             return "";
         }
-
-        HashMap<Character, Integer> map = new HashMap<>();
-
-        // Store frequencies of t
-        for(char ch : t.toCharArray()) {
-            map.put(ch, map.getOrDefault(ch, 0) + 1);
-        }
-
-        int left = 0;
-
-        // Number of characters still needed
+        int j = 0;
         int required = t.length();
-
-        // To store minimum window
-        int minLen = Integer.MAX_VALUE;
-        int start = 0;
-
-        for(int right = 0; right < s.length(); right++) {
-
-            char rightChar = s.charAt(right);
-
-            // If character is needed
-            if(map.containsKey(rightChar)) {
-
-                // If frequency > 0, this char helps satisfy t
-                if(map.get(rightChar) > 0) {
+        HashMap<Character, Integer> map = new HashMap<>();
+        int start =0;
+        int min = Integer.MAX_VALUE;
+        for(int i=0 ; i< t.length(); i++){
+            map.put(t.charAt(i),map.getOrDefault(t.charAt(i),0)+1);
+        }
+        for(int i = 0; i< s.length(); i++){
+            if(map.containsKey(s.charAt(i))){
+                if(map.get(s.charAt(i)) > 0) {
                     required--;
                 }
-
-                // Reduce frequency
-                map.put(rightChar, map.get(rightChar) - 1);
+                map.put(s.charAt(i),map.get(s.charAt(i))-1);
             }
-
-            // Window valid
-            while(required == 0) {
-
-                // Update minimum answer
-                if(right - left + 1 < minLen) {
-                    minLen = right - left + 1;
-                    start = left;
+            while(required==0){
+                if(i-j+1 < min){
+                    min = i-j+1;
+                    start = j ;
                 }
-
-                char leftChar = s.charAt(left);
-
-                // If left char belongs to t
-                if(map.containsKey(leftChar)) {
-
-                    // Add back frequency
-                    map.put(leftChar, map.get(leftChar) + 1);
-
-                    // If frequency becomes > 0,
-                    // we lost a required character
-                    if(map.get(leftChar) > 0) {
+                if(map.containsKey(s.charAt(j))){
+                    
+                    map.put(s.charAt(j),map.get(s.charAt(j))+1);
+                    if(map.get(s.charAt(j))>0){
                         required++;
                     }
                 }
-
-                left++;
+                j++;
             }
         }
-
-        if(minLen == Integer.MAX_VALUE) {
+        if(min == Integer.MAX_VALUE) {
             return "";
         }
 
-        return s.substring(start, start + minLen);
+        return s.substring(start, start + min);
     }
 }
