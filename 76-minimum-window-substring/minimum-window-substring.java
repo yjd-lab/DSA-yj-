@@ -13,7 +13,7 @@ class Solution {
         }
         for(int i = 0 ; i< s.length() ; i++){
             if(map.containsKey(s.charAt(i))){
-                if(map.get(s.charAt(i)) > 0) { // i forget this lone always
+                if(map.get(s.charAt(i)) > 0) { // i forget this lone always;this is important for extra copies: negative means extra copies
                     req--;
                 }
                 map.put(s.charAt(i),map.get(s.charAt(i))-1);
@@ -25,7 +25,7 @@ class Solution {
                 }
                 if(map.containsKey(s.charAt(j))){
                     map.put(s.charAt(j),map.get(s.charAt(j))+1);
-                    if(map.get(s.charAt(j))>0){
+                    if(map.get(s.charAt(j))>0){//negative means extra copies
                         req++;
                     }
 
