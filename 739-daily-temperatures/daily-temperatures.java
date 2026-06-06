@@ -13,7 +13,7 @@ class Solution {
 
                 int prevIndex = stk.pop();
 
-                result[prevIndex] = i - prevIndex;
+                result[prevIndex] = i - prevIndex; //important
             }
 
             stk.push(i);
