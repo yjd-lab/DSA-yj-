@@ -7,7 +7,7 @@ class Solution {
 
             String ch = operations[i]; // beacuse the elements in the list are string
 
-            if(!ch.equals("+") &&
+            if(!ch.equals("+") &&   // this is how u compare stringss
                !ch.equals("D") &&
                !ch.equals("C")) {
 
