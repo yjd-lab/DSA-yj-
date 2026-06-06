@@ -5,7 +5,7 @@ class Solution {
 
         for(int i = 0; i < operations.length; i++) {
 
-            String ch = operations[i];
+            String ch = operations[i]; // beacuse the elements in the list are string
 
             if(!ch.equals("+") &&
                !ch.equals("D") &&
