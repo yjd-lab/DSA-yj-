@@ -14,6 +14,11 @@ class Solution {
     private boolean isPalindrome(String s, int left, int right) {
         while (left < right) {
             if (s.charAt(left++) != s.charAt(right--)) return false;
+            // why not this :
+            // if (s.charAt(left) != s.charAt(right)){ 
+            //    left++;
+            //    right--;
+            //    return false;}
         }
         return true;
     }
