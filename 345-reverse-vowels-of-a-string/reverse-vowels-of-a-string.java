@@ -4,9 +4,9 @@ class Solution {
         char[] str = s.toCharArray();
         int left = 0;
         int right = str.length-1;
-         while (left<right){
+        while (left<right){
             while(left<right && vowels.indexOf(str[left])==-1){
-                left++; //why check left<right again
+                left++;
             }
             while(left<right && vowels.indexOf(str[right])==-1){
                 right--;
@@ -16,6 +16,8 @@ class Solution {
             str[right]= temp;
             left++;
             right-- ;
+
+        }
+        return new String(str);
     }
-    return new String(str);
-}}
+}
