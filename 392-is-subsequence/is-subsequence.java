@@ -1,16 +1,23 @@
 class Solution {
     public boolean isSubsequence(String s, String t) {
-        if(s== null || s.equals("")){
+        // Base case: An empty string is always a subsequence of any string
+        if (s.isEmpty()) {
             return true;
         }
-        int i =0;
-        for (int j =0 ; j< t .length() ; j++){
-            if(i < s.length() && s.charAt(i)==t.charAt(j)){
-                i++;
+        // If s is longer than t, it cannot be a subsequence
+        if (s.length() > t.length()) {
+            return false;
+        }
+        int left =0;
+        for(int i=0;i<t.length();i++){
+            if(s.charAt(left)==t.charAt(i)){
+                left++;
             }
-
-        }if (i == s.length()){
-            return true;
-        }return false;
+             // FIX: Stop immediately once all characters in 's' are found
+            if (left == s.length()) {
+                return true;
+            }
+        }
+        return false;
     }
 }
