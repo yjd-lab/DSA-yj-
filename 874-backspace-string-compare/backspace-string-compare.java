@@ -1,63 +1,30 @@
+import java.util.Stack;
+
 class Solution {
-
     public boolean backspaceCompare(String s, String t) {
-
+        // You must compare the built version of BOTH strings
         return build(s).equals(build(t));
     }
-
+    
+    // Changed return type from boolean to String
     public String build(String str) {
-
         Stack<Character> stk = new Stack<>();
-
-        for(int i = 0; i < str.length(); i++) {
-
-            char ch = str.charAt(i);
-
-            if(ch == '#') {
-
-                if(!stk.isEmpty()) {
+        for (char i : str.toCharArray()) { // Fixed variable name to use 'str'
+            // Only pop if the stack is not empty AND the current character is '#'
+            if (i == '#') {
+                if (!stk.isEmpty()) {
                     stk.pop();
                 }
-            }
-
-            else {
-
-                stk.push(ch);
+            } else {
+                stk.push(i);
             }
         }
-
-        StringBuilder st = new StringBuilder();
-
-        for(char c : stk) {
-            st.append(c);
+        
+        // Convert the stack back into a String to return it
+        StringBuilder result = new StringBuilder();
+        for (char ch : stk) {
+            result.append(ch);
         }
-
-        return st.toString();
+        return result.toString();
     }
 }
-
-/*class Solution {
-
-    public boolean backspaceCompare(String s, String t) {
-
-        return build(s).equals(build(t));
-    }
-
-    public String build(String str) {
-
-        StringBuilder string = new StringBuilder();
-
-        for(int i = 0; i < str.length(); i++) {
-
-            if(str.charAt(i) != '#') {
-                string.append(str.charAt(i));
-            }
-
-            else if(string.length() > 0) {
-                string.deleteCharAt(string.length() - 1);
-            }
-        }
-
-        return string.toString();
-    }
-} */
