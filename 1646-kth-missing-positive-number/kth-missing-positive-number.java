@@ -13,6 +13,6 @@ class Solution {
                 right = mid - 1;
             }
         }
-        return left + k;
+        return left + k; // trick to get the answewr
     }
 }
