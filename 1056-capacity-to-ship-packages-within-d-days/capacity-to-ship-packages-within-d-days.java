@@ -1,7 +1,5 @@
 class Solution {
-
     public int shipWithinDays(int[] weights, int days) {
-
         int left = 0;
         int right = 0;
 
@@ -14,39 +12,24 @@ class Solution {
         }
 
         int res = right;
-
-        while(left <= right){
-
-            int mid = left + (right - left) / 2;
-
-            int d = 1; // before loading anything we are already on day 1
-            int currentWeight = 0;
-
-            for(int weight : weights){ // this whole block is importnant
-
-                if(currentWeight + weight > mid){
-
+        while(left<=right){
+            int mid = left +(right - left)/2;
+            int d = 1;
+            int currentweight = 0;
+            for(int w: weights){
+                if(currentweight+w>mid){
                     d++;
-
-                    currentWeight = 0;
+                    currentweight = 0;
                 }
-
-                currentWeight += weight; // very importnant
+                currentweight += w;
             }
-
-            if(d > days){
-
-                left = mid + 1;
-            }
-
-            else{
-
+            if(d>days){
+                left = mid+1;
+            }else{
                 res = mid;
-
-                right = mid - 1;
+                right = mid-1;
             }
         }
-
         return res;
     }
 }
