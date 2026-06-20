@@ -1,5 +1,4 @@
 class Solution {
-
     public int leastInterval(char[] tasks, int n) {
 
         int[] freq = new int[26];
@@ -21,8 +20,7 @@ class Solution {
 
         while(!pq.isEmpty()){
 
-            List<Integer> used =
-                new ArrayList<>();
+            List<Integer> used = new ArrayList<>();
 
             int cycle = n + 1;
             int work = 0;
@@ -32,9 +30,7 @@ class Solution {
                 i++){
 
                 int count = pq.poll();
-
                 count--;
-
                 work++;
 
                 if(count > 0){
