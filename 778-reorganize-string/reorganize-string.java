@@ -1,43 +1,29 @@
 class Solution {
     public String reorganizeString(String s) {
-
-        HashMap<Character, Integer> map = new HashMap<>();
-
-        for (char c : s.toCharArray()) {
-            map.put(c, map.getOrDefault(c, 0) + 1);
+        Map<Character, Integer> map = new HashMap<>();
+        for (char word : s.toCharArray()) {
+            map.put(word, map.getOrDefault(word, 0) + 1);
         }
-
-        PriorityQueue<Character> pq =
-            new PriorityQueue<>(
-                (a, b) -> map.get(b) - map.get(a)
-            );
-
-        for (char c : map.keySet()) {
-            pq.offer(c);
+        PriorityQueue<Character> pq = new PriorityQueue<>(
+            (a, b) -> map.get(a).equals(map.get(b)) ? b.compareTo(a) : map.get(b) - map.get(a)
+        );
+        for(char ch : map.keySet()){
+            pq.offer(ch);
         }
-
-        StringBuilder sb = new StringBuilder();
-
-        Character prev = null;
-
-        while (!pq.isEmpty()) {
-
-            char curr = pq.poll();
-
-            sb.append(curr);
-
-            map.put(curr, map.get(curr) - 1);
-
-            if (prev != null &&
+        StringBuilder res = new StringBuilder();
+        char prev = '#';
+        while(!pq.isEmpty()){
+            char c = pq.poll();
+            res.append(c);
+            map.put(c,map.get(c)-1);
+            if (prev != '#' &&
                 map.get(prev) > 0) {
                 pq.offer(prev);
-            }
-
-            prev = curr;
+            }   
+            prev = c;
         }
-
-        return sb.length() == s.length()
-                ? sb.toString()
+        return res.length() == s.length()
+                ? res.toString()
                 : "";
     }
 }
