@@ -1,23 +1,37 @@
+import java.util.*;
+
 class Solution {
     public List<String> topKFrequent(String[] words, int k) {
-        HashMap<String,Integer> map = new HashMap<>();
-        for(String i : words){
-            map.put(i,map.getOrDefault(i,0)+1);
+        // 1. Populate the frequency map
+        Map<String, Integer> map = new HashMap<>();
+        for (String word : words) {
+            map.put(word, map.getOrDefault(word, 0) + 1);
         }
-       PriorityQueue<String> pq = new PriorityQueue<>(
+        
+        // 2. Initialize Min-Heap with custom comparator
+        // Lower frequencies stay at the top. 
+        // If frequencies are equal, lexicographically greater words stay at the top.
+        PriorityQueue<String> pq = new PriorityQueue<>(
             (a, b) -> map.get(a).equals(map.get(b)) ? b.compareTo(a) : map.get(a) - map.get(b)
         );
+        
+        // 3. Keep only the top k elements in the heap
         for (String word : map.keySet()) {
-            pq.add(word);
-            if(pq.size()>k){
+            pq.offer(word);
+            if (pq.size() > k) {
                 pq.poll();
             }
         }
-        LinkedList<String> result = new LinkedList<>();
+        
+        // 4. Build the final sorted result list
+        List<String> res = new ArrayList<>();
         while (!pq.isEmpty()) {
-            // Since it's a min-heap, adding to the front reverses it into descending order
-            result.addFirst(pq.poll());
+            res.add(pq.poll());
         }
-        return result;
+        
+        // Since it's a min-heap, elements are pulled out smallest to largest. 
+        // Reverse it to get the highest frequency first.
+        Collections.reverse(res);
+        return res;
     }
 }
