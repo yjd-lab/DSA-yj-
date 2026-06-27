@@ -2,14 +2,14 @@ class Solution {
     public boolean issafe(char[][] board, int row, int col, char digit){
         // 1. Check the horizontal row
         for(int j = 0; j < 9; j++){
-            if(board[row][j] == digit){ // Fixed typo: changed dig to digit
+            if(board[row][j] == digit){ 
                 return false;
             }
         } 
         
         // 2. Check the vertical column
         for(int i = 0; i < 9; i++){
-            if(board[i][col] == digit){ // Fixed typo: changed dig to digit
+            if(board[i][col] == digit){ 
                 return false;
             }
         }
@@ -29,35 +29,45 @@ class Solution {
     }
 
     public void solveSudoku(char[][] board) {
-        solve(board);
+        // Start the recursion at the very first cell: row 0, col 0
+        solve(board, 0, 0);
     }
 
-    // Helper method that returns a boolean to stop the recursion immediately once solved
-    private boolean solve(char[][] board) {
-        for (int row = 0; row < 9; row++) {
-            for (int col = 0; col < 9; col++) {
+    // Helper method using your cell-by-cell approach
+    private boolean solve(char[][] board, int row, int col) {
+        // Base Case: If we successfully pass row 8 (index 9), the entire board is full
+        if(row == 9){
+            return true;
+        }
+        
+        // Calculate the next cell coordinates
+        int nextrow = row;
+        int nextcol = col + 1;
+        if(nextcol == 9){ // Fixed typo: nectcol to nextcol
+            nextrow = row + 1;
+            nextcol = 0;
+        }
+        
+        // If the current cell already has a fixed clue number, skip it and move on
+        if(board[row][col] != '.'){
+            return solve(board, nextrow, nextcol); // Fixed: changed 'helper' to 'solve'
+        }
+
+        // Try placing digits '1' through '9' in the empty cell
+        for (char digit = '1'; digit <= '9'; digit++) {
+            if (issafe(board, row, col, digit)) {
                 
-                // Find an empty cell represented by '.'
-                if (board[row][col] == '.') {
-                    
-                    // Try placing digits '1' through '9'
-                    for (char digit = '1'; digit <= '9'; digit++) {
-                        if (issafe(board, row, col, digit)) {
-                            
-                            board[row][col] = digit;           // 1. PLACE the digit
-                            
-                            if (solve(board)) {                // 2. RECURSE
-                                return true; // If successful, keep the placement and propagate up
-                            }
-                            
-                            board[row][col] = '.';             // 3. BACKTRACK (Reset if it failed)
-                        }
-                    }
-                    
-                    return false; // If no digit 1-9 fits in this empty cell, trigger backtracking
+                board[row][col] = digit; // 1. PLACE the digit
+                
+                // 2. RECURSE to the next cell calculated above
+                if (solve(board, nextrow, nextcol)) { 
+                    return true; 
                 }
+                
+                board[row][col] = '.';   // 3. BACKTRACK (Reset if it failed)
             }
         }
-        return true; // If no empty cells are left, the entire Sudoku puzzle is solved!
+        
+        return false; // Triggers backtracking if no digit 1-9 works here
     }
 }
