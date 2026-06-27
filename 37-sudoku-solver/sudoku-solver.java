@@ -28,10 +28,7 @@ class Solution {
         return true;
     }
 
-    public void solveSudoku(char[][] board) {
-        // Start the recursion at the very first cell: row 0, col 0
-        solve(board, 0, 0);
-    }
+   
 
     // Helper method using your cell-by-cell approach
     private boolean solve(char[][] board, int row, int col) {
@@ -69,5 +66,10 @@ class Solution {
         }
         
         return false; // Triggers backtracking if no digit 1-9 works here
+    }
+
+     public void solveSudoku(char[][] board) {
+        
+        solve(board, 0, 0);
     }
 }
