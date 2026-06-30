@@ -28,6 +28,6 @@ public class Solution {
                 tail2=tail2.next;
             }
         }
-        return tail1;
+        return tail2;
     }
 }
