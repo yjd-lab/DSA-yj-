@@ -20,16 +20,16 @@ class Solution {
             return true;
         }
         // Use a helper function to compare the left and right subtrees
-        return isMirror(root.left, root.right);
+        return Mirror(root.left, root.right);
     }
-    public boolean isMirror(TreeNode t1,TreeNode t2){
+    public boolean Mirror(TreeNode t1,TreeNode t2){
         if(t1==null&& t2==null){
             return true;
         }
         if(t1==null||t2==null){
             return false;
         }
-        return (t1.val==t2.val) && isMirror(t1.left,t2.right) && isMirror(t1.right,t2.left);
+        return (t1.val==t2.val) && Mirror(t1.left,t2.right) && Mirror(t1.right,t2.left);
 
     }
 }
