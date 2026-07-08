@@ -14,10 +14,10 @@ class Solution {
         }
         
         // 3. Your recursive calls, but capturing the variables instead of ignoring them
-        boolean leftMatches = isSameTree(p.left, q.left);
-        boolean rightMatches = isSameTree(p.right, q.right);
+        boolean left = isSameTree(p.left, q.left);
+        boolean right = isSameTree(p.right, q.right);
         
         // 4. Only return true if BOTH subtrees also matched perfectly
-        return leftMatches && rightMatches;
+        return left && right;
     }
 }
