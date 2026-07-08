@@ -3,19 +3,19 @@ class Solution {
     public int res = 0;
 
     public int diameterOfBinaryTree(TreeNode root) {
-        diameter(root);
+        dia(root);
         return res;
     }
 
-    public int diameter(TreeNode root) {
+    public int dia(TreeNode root) {
         // 1. Base Case: If the node is null, its height is 0
         if (root == null) {
             return 0;
         }
 
         // 2. Get the maximum height of left and right subtrees
-        int left = diameter(root.left);
-        int right = diameter(root.right);
+        int left = dia(root.left);
+        int right = dia(root.right);
 
         // 3. Update the global maximum diameter if the path through 
         // the current node is larger than what we've seen so far
