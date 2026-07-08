@@ -16,17 +16,17 @@
 class Solution {
     public int depth = 0; 
     public int maxDepth(TreeNode root) {
-        maxcount(root,1);
+        count(root,1);
         return depth;
     }
-    public void maxcount(TreeNode root , int count){
+    public void count(TreeNode root , int count){
         if(root== null){
             return ;
         }
         if(root.left==null && root.right==null){
              depth = Math.max(depth,count);
         }
-        maxcount(root.left,count+1);
-        maxcount(root.right,count+1);
+        count(root.left,count+1);
+        count(root.right,count+1);
     }
 }
