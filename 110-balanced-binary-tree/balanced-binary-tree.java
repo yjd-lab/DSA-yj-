@@ -15,17 +15,17 @@
  */
 class Solution {
     public boolean isBalanced(TreeNode root) {
-        return ch(root) != -1;
+        return c(root) != -1;
     }
-    public int ch(TreeNode root){
+    public int c(TreeNode root){
         if(root == null){
             return 0;
         }
-        int left = ch(root.left);
+        int left = c(root.left);
         if(left==-1){
             return -1;
         }
-        int right = ch(root.right);
+        int right = c(root.right);
         if(right==-1){
             return -1;
         }
